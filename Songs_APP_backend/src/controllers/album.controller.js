@@ -8,14 +8,18 @@ router.post("/", async (req, res) => {
   return res.send("album");
 });
 router.get("/", async (req, res) => {
-  const alb = await Album.find().lean().exec();
-  return res.send(alb);
+  const page = +req.query.page || 1;
+  const size = +req.query.size || 1;
+  const offset = (page - 1) * size;
+  const album = await Album.find().skip(offset).limit(size).lean().exec();
+
+  const total = await Album.find().countDocuments();
+  const totalpages = Math.ceil(total / size);
+  return res.send({ album, totalpages });
 });
 
-router.get("/:name", async (req, res) => {
-  const album = await Album.findOne({
-    album_name: req.params.name,
-  })
+router.get("/:id", async (req, res) => {
+  const album = await Album.findById(req.params.id)
     .populate("author")
     .populate("Songs")
     .lean()
@@ -26,5 +30,9 @@ router.get("/:name", async (req, res) => {
   } else {
     return res.send("no");
   }
+});
+router.get("/search/:name", async (req, res) => {
+  const album = await Album.find({ album_name: req.params.name });
+  return res.send(album);
 });
 module.exports = router;

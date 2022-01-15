@@ -13,6 +13,7 @@ function Search() {
         return res.json();
       })
       .then((dat) => {
+        console.log(dat);
         setSingle(dat);
       });
   }, [state]);

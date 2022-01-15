@@ -8,7 +8,7 @@ function Homepage() {
   const [sort, setSort] = useState(true);
   const [text, setText] = useState("");
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(2);
+  const [size, setSize] = useState(3);
 
   let getData = async () => {
     const res = await fetch(
@@ -79,8 +79,14 @@ function Homepage() {
           </Link>
         ))}
       <div>
-        <button onClick={handlenext}>Next</button>
-        <button onClick={handleprev}>Prev</button>
+        <div className={styles.center}>
+          <button onClick={handlenext} style={{ cursor: "pointer" }}>
+            Next
+          </button>
+          <button onClick={handleprev} style={{ cursor: "pointer" }}>
+            Prev
+          </button>
+        </div>
       </div>
     </div>
   );
