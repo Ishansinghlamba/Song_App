@@ -3,9 +3,21 @@
   width: 20%;
   margin: 20px auto;
   border-radius: 20px;
-  border: solid wheat;
+  border: solid whitesmoke;
 }
 .center {
   text-align: center;
   color: aliceblue;
+}
+.pic {
+  height: 70%;
+  /* outline: tomato solid; */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.pic img {
+  height: 100%;
+  width: 100%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }

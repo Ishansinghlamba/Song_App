@@ -15,7 +15,9 @@ function Homepage() {
       {data.map((e) => (
         <div key={e._id} className={styles.main}>
           <h3 className={styles.center}>{e.album_name}</h3>
-          <div className={styles.pic}></div>
+          <div className={styles.pic}>
+            <img src={e.Pic} alt="nn" />
+          </div>
         </div>
       ))}
     </div>
