@@ -26,3 +26,11 @@
   display: flex;
   justify-content: space-around;
 }
+.sort {
+  border: 0;
+  padding: 0;
+  padding: 20px 40px;
+  border-radius: 50%;
+  background-color: violet;
+  cursor: pointer;
+}

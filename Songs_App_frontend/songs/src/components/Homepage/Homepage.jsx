@@ -12,6 +12,7 @@ function Homepage() {
   }, []);
   return (
     <div>
+      <button className={styles.sort}>Sort</button>
       {data
         .sort((a, b) => {
           return b.Year - a.Year;
