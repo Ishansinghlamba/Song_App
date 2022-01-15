@@ -4,6 +4,7 @@
   margin: 20px auto;
   border-radius: 20px;
   border: solid whitesmoke;
+  cursor: pointer;
 }
 .center {
   text-align: center;
@@ -20,4 +21,8 @@
   width: 100%;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+.fl {
+  display: flex;
+  justify-content: space-around;
 }
