@@ -7,14 +7,20 @@ function Homepage() {
   const [data, setData] = useState([]);
   const [sort, setSort] = useState(true);
   const [text, setText] = useState("");
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(2);
+
   let getData = async () => {
-    const res = await fetch("http://localhost:4003/albums");
+    const res = await fetch(
+      `http://localhost:4003/albums?page=${page}&size=${size}`
+    );
     const data = await res.json();
-    setData(data);
+    // console.log(data.album);
+    setData(data.album);
   };
   useEffect(() => {
     getData();
-  }, []);
+  }, [page, size]);
   const handlechange = (e) => {
     setText(e.target.value);
   };
@@ -24,6 +30,16 @@ function Homepage() {
     history.push({
       pathname: "/search",
       state: text,
+    });
+  };
+  const handlenext = () => {
+    setPage((e) => {
+      return ++e;
+    });
+  };
+  const handleprev = () => {
+    setPage((e) => {
+      return --e;
     });
   };
   return (
@@ -62,6 +78,10 @@ function Homepage() {
             </div>
           </Link>
         ))}
+      <div>
+        <button onClick={handlenext}>Next</button>
+        <button onClick={handleprev}>Prev</button>
+      </div>
     </div>
   );
 }
