@@ -1,0 +1,11 @@
+.main {
+  height: 200px;
+  width: 20%;
+  margin: 20px auto;
+  border-radius: 20px;
+  border: solid wheat;
+}
+.center {
+  text-align: center;
+  color: aliceblue;
+}

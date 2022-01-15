@@ -1,16 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect } from "react";
+import Homepage from "./components/Homepage/Homepage";
 function App() {
-  let getData = async () => {
-    const res = await fetch("http://localhost:4003/albums");
-    const data = await res.json();
-    console.log(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-  return <div className="App">hello</div>;
+  return (
+    <div>
+      <Homepage />
+    </div>
+  );
 }
 
 export default App;
