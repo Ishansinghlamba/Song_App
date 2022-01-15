@@ -1,10 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { Route, Switch } from "react-router-dom";
 import Homepage from "./components/Homepage/Homepage";
+import Albumdetails from "./components/Albumdetails/Albumdetails";
 function App() {
   return (
     <div>
-      <Homepage />
+      <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
+        <Route exact path="/albums/:id">
+          <Albumdetails />
+        </Route>
+      </Switch>
     </div>
   );
 }
