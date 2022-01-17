@@ -1,22 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import styles from "./Homepage.module.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Search() {
-  const { state } = useLocation();
+  //   const { state } = useLocation();
+  const { name } = useParams();
+
   const [single, setSingle] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:4003/albums/search/${state}`)
+    fetch(`http://localhost:4003/albums/search/${name}`)
       .then((res) => {
         return res.json();
       })
       .then((dat) => {
-        console.log(dat);
         setSingle(dat);
       });
-  }, [state]);
+  }, []);
   return (
     <div>
       {single.map((e) => (

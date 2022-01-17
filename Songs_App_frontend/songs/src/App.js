@@ -7,13 +7,13 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/">
+        <Route path="/home">
           <Homepage />
         </Route>
-        <Route exact path="/albums/:id">
+        <Route path="/albums/:id">
           <Albumdetails />
         </Route>
-        <Route exact path="/search/:name">
+        <Route path="/search/:name">
           <Search />
         </Route>
       </Switch>

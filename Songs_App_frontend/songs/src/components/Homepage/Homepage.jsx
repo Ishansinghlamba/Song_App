@@ -4,23 +4,28 @@ import { useHistory } from "react-router-dom";
 
 import styles from "./Homepage.module.css";
 function Homepage() {
+  const authResult = new URLSearchParams(window.location.search);
+  const page = Number(authResult.get("page"));
+  const size = Number(authResult.get("size"));
+  console.log(page);
   const [data, setData] = useState([]);
   const [sort, setSort] = useState(true);
   const [text, setText] = useState("");
-  const [page, setPage] = useState(1);
-  const [size, setSize] = useState(2);
-
+  const [pageo, setPageo] = useState(page || 1);
+  const [sizeo, setSizeo] = useState(size || 1);
+  const [totalPage, setTotalPage] = useState(0);
+  const arraypages = new Array(totalPage).fill(0).map((e, i) => e + i + 1);
   let getData = async () => {
     const res = await fetch(
-      `http://localhost:4003/albums?page=${page}&size=${size}`
+      `http://localhost:4003/albums?page=${pageo}&size=${sizeo}`
     );
-    const data = await res.json();
-    // console.log(data.album);
-    setData(data.album);
+    const { album, totalpages } = await res.json();
+    setTotalPage(totalpages);
+    setData(album);
   };
   useEffect(() => {
     getData();
-  }, [page, size]);
+  }, [pageo, sizeo]);
   const handlechange = (e) => {
     setText(e.target.value);
   };
@@ -28,19 +33,15 @@ function Homepage() {
 
   const handlego = () => {
     history.push({
-      pathname: "/search",
+      pathname: `/search/${text}`,
       state: text,
     });
   };
-  const handlenext = () => {
-    setPage((e) => {
-      return ++e;
+  const handleit = (i) => {
+    history.push({
+      pathname: `/home?page=${i}`,
     });
-  };
-  const handleprev = () => {
-    setPage((e) => {
-      return --e;
-    });
+    setPageo(i);
   };
   return (
     <div>
@@ -79,14 +80,9 @@ function Homepage() {
           </Link>
         ))}
       <div>
-        <div className={styles.center}>
-          <button onClick={handlenext} style={{ cursor: "pointer" }}>
-            Next
-          </button>
-          <button onClick={handleprev} style={{ cursor: "pointer" }}>
-            Prev
-          </button>
-        </div>
+        {arraypages.map((e) => (
+          <button onClick={() => handleit(e)}>{e}</button>
+        ))}
       </div>
     </div>
   );
