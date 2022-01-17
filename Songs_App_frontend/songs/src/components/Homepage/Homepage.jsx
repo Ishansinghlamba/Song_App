@@ -121,8 +121,3 @@ function Homepage() {
 }
 
 export default Homepage;
-// filtero
-// ? true
-// : i.Genre === "No filter"
-// ? console.log("hello")
-// : i.Genre === filtertext
