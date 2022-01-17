@@ -7,6 +7,7 @@ function Homepage() {
   const authResult = new URLSearchParams(window.location.search);
   const page = Number(authResult.get("page"));
   const size = Number(authResult.get("size"));
+  const f = authResult.get("f");
   const [data, setData] = useState([]);
   const [sort, setSort] = useState(true);
   const [text, setText] = useState("");
@@ -14,7 +15,7 @@ function Homepage() {
   const [sizeo, setSizeo] = useState(size || 2);
   const [totalPage, setTotalPage] = useState(0);
   const [filtero, setfilero] = useState(true);
-  const [filtertext, setfiltertext] = useState("");
+  const [filtertext, setfiltertext] = useState(f || "");
   const arraypages = new Array(totalPage).fill(0).map((e, i) => e + i + 1);
   let getData = async () => {
     const res = await fetch(
@@ -30,6 +31,12 @@ function Homepage() {
   const handlechange = (e) => {
     setText(e.target.value);
   };
+  useEffect(() => {
+    if (f) {
+      setfilero(false);
+      setfiltertext(f);
+    }
+  }, []);
   const history = useHistory();
 
   const handlego = () => {
@@ -51,6 +58,9 @@ function Homepage() {
       setfilero(false);
       setfiltertext(e.target.value);
     }
+    history.push({
+      pathname: `/home/?page=${pageo}&f=${e.target.value}`,
+    });
   };
   return (
     <div>
@@ -83,7 +93,7 @@ function Homepage() {
           filtero
             ? true
             : i.Genre === "No filter"
-            ? console.log("hello")
+            ? true
             : i.Genre === filtertext
         )
         .sort((a, b) => (sort ? true : b.Year - a.Year))
@@ -111,3 +121,8 @@ function Homepage() {
 }
 
 export default Homepage;
+// filtero
+// ? true
+// : i.Genre === "No filter"
+// ? console.log("hello")
+// : i.Genre === filtertext
