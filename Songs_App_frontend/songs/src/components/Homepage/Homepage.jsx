@@ -8,7 +8,7 @@ function Homepage() {
   const [sort, setSort] = useState(true);
   const [text, setText] = useState("");
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(3);
+  const [size, setSize] = useState(2);
 
   let getData = async () => {
     const res = await fetch(

@@ -13,7 +13,7 @@ function App() {
         <Route exact path="/albums/:id">
           <Albumdetails />
         </Route>
-        <Route exact path="/search">
+        <Route exact path="/search/:name">
           <Search />
         </Route>
       </Switch>
